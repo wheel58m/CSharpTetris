@@ -8,10 +8,15 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 using Classes;
-
+using System.Drawing;
 namespace Tetris;
+
 class Program {
     static void Main(string[] args) {
+        Block block = new(new GridCoordinate(0, 0), Color.Red);
+        block.Render();
 
+        Console.ReadKey();
+        block.Move(1, 1);
     }
 }
