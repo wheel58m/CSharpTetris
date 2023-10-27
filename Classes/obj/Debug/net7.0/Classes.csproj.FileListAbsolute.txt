@@ -1,0 +1,11 @@
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Classes/bin/Debug/net7.0/Classes.deps.json
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Classes/bin/Debug/net7.0/Classes.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Classes/bin/Debug/net7.0/Classes.pdb
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Classes/obj/Debug/net7.0/Classes.GeneratedMSBuildEditorConfig.editorconfig
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Classes/obj/Debug/net7.0/Classes.AssemblyInfoInputs.cache
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Classes/obj/Debug/net7.0/Classes.AssemblyInfo.cs
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Classes/obj/Debug/net7.0/Classes.csproj.CoreCompileInputs.cache
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Classes/obj/Debug/net7.0/Classes.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Classes/obj/Debug/net7.0/refint/Classes.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Classes/obj/Debug/net7.0/Classes.pdb
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Classes/obj/Debug/net7.0/ref/Classes.dll
