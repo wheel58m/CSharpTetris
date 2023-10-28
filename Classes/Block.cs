@@ -26,7 +26,7 @@ public class Block : IBlockObject {
         }
     }
     public void Move(int x, int y) {
-        Clear(); // Erase the block from the console
+        // Clear(); // Erase the block from the console
         Location = new GridCoordinate(Location.ColumnX + x, Location.RowY + y); // Is this bad practice?
         Render();
     }
