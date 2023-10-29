@@ -9,6 +9,7 @@
       "Tests/1.0.0": {
         "dependencies": {
           "Classes": "1.0.0",
+          "DebugTools": "1.0.0",
           "Microsoft.NET.Test.Sdk": "17.7.1",
           "NUnit": "3.13.3",
           "NUnit.Analyzers": "3.6.1",
@@ -321,6 +322,14 @@
         "runtime": {
           "Classes.dll": {}
         }
+      },
+      "DebugTools/1.0.0": {
+        "dependencies": {
+          "Classes": "1.0.0"
+        },
+        "runtime": {
+          "DebugTools.dll": {}
+        }
       }
     }
   },
@@ -422,6 +431,11 @@
       "hashPath": "system.reflection.metadata.1.6.0.nupkg.sha512"
     },
     "Classes/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DebugTools/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

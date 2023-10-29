@@ -1,0 +1,15 @@
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/obj/Debug/net7.0/DebugTools.GeneratedMSBuildEditorConfig.editorconfig
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/obj/Debug/net7.0/DebugTools.AssemblyInfoInputs.cache
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/obj/Debug/net7.0/DebugTools.AssemblyInfo.cs
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/obj/Debug/net7.0/DebugTools.csproj.CoreCompileInputs.cache
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/bin/Debug/net7.0/DebugTools.deps.json
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/bin/Debug/net7.0/DebugTools.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/bin/Debug/net7.0/DebugTools.pdb
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/bin/Debug/net7.0/Classes.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/bin/Debug/net7.0/Classes.pdb
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/obj/Debug/net7.0/DebugTools.csproj.AssemblyReference.cache
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/obj/Debug/net7.0/DebugTools.csproj.CopyComplete
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/obj/Debug/net7.0/DebugTools.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/obj/Debug/net7.0/refint/DebugTools.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/obj/Debug/net7.0/DebugTools.pdb
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/DebugTools/obj/Debug/net7.0/ref/DebugTools.dll

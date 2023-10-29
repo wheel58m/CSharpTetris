@@ -6,22 +6,31 @@
 
 // NOTES ///////////////////////////////////////////////////////////////////////
 // - I-Shaped Pieces typically don't rotate around a block; consider changing.
+// - Further increase utilization of the Rotation Enum.
 ////////////////////////////////////////////////////////////////////////////////
 using Classes;
+using DebugTools;
+using System.Diagnostics;
 using System.Drawing;
 namespace Tetris;
 
 class Program {
     static void Main(string[] args) {
-        Piece piece = new SPiece(new GridCoordinate(5, 5), Color.Yellow);
-        piece.Render();
+        Console.Clear();
+        Board board = new(0, 0);
+        board.Render();
+        // DebugTools.BoardDebug.FillGrid(board);
         
         while(true) {
-            Console.ReadKey(true);
-            piece.ChangeColor(Utility.GetRandomColor(piece.Color));
-            piece.Rotate();
-
-            Console.SetCursorPosition(0, 0);
+            board.GeneratePiece();
+            board.ActivePiece!.ChangeColor(Color.Blue);
+            board.ActivePiece!.Render();
+            PieceDebug.HighlightOrigin(board.ActivePiece!);
+            // PieceDebug.HighlightCenter(board.ActivePiece!, Color.Red);
+            Console.SetCursorPosition(0, board.Bounds.yMax + 3);
+            Console.WriteLine($"Piece Location: {board.ActivePiece!.Location.ColumnX}, {board.ActivePiece!.Location.RowY}");
+            Console.ReadKey();
+            board.ActivePiece?.Clear();
         }
     }
 }

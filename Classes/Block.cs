@@ -25,9 +25,13 @@ public class Block : IBlockObject {
             Console.Write(" ");
         }
     }
-    public void Move(int x, int y) {
-        // Clear(); // Erase the block from the console
+    public void Move(int x, int y, bool rerender = false) {
+        if (rerender) {
+            Clear(); // Erase the block from the console // This conflicts with the Piece.Move() method because it can clear a block that was already cleared.
+        }
         Location = new GridCoordinate(Location.ColumnX + x, Location.RowY + y); // Is this bad practice?
-        Render();
+        if (rerender) {
+            Render();
+        }
     }
 }

@@ -7,5 +7,5 @@ public interface IBlockObject {
 
     public void Render();
     public void Clear();
-    public void Move(int x, int y);
+    public void Move(int x, int y, bool rerender);
 }

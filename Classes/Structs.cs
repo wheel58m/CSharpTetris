@@ -10,6 +10,6 @@ public struct GridCoordinate {
     }
 
     public readonly (int, int) ConvertToConsoleCoordinates() {
-        return (ColumnX * Art.Block.Width, RowY);
+        return (ColumnX * Art.Block.Width + Settings.BoardBuffer, RowY + Settings.BoardBuffer);
     }
 }

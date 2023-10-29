@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Classes\Classes.csproj" />
+    <ProjectReference Include="..\DebugTools\DebugTools.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

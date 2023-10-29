@@ -99,3 +99,5 @@
 /Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tests/obj/Debug/net7.0/Tests.pdb
 /Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tests/obj/Debug/net7.0/Tests.genruntimeconfig.cache
 /Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tests/obj/Debug/net7.0/ref/Tests.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tests/bin/Debug/net7.0/DebugTools.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tests/bin/Debug/net7.0/DebugTools.pdb
