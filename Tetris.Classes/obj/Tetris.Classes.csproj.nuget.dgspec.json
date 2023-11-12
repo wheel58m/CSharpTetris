@@ -1,0 +1,118 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/Tetris.Classes.csproj": {}
+  },
+  "projects": {
+    "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/Tetris.Classes.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/Tetris.Classes.csproj",
+        "projectName": "Tetris.Classes",
+        "projectPath": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/Tetris.Classes.csproj",
+        "packagesPath": "/Users/wheel58m/.nuget/packages/",
+        "outputPath": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/wheel58m/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Utilities/Tetris.Utilities.csproj": {
+                "projectPath": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Utilities/Tetris.Utilities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Utilities/Tetris.Utilities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Utilities/Tetris.Utilities.csproj",
+        "projectName": "Tetris.Utilities",
+        "projectPath": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Utilities/Tetris.Utilities.csproj",
+        "packagesPath": "/Users/wheel58m/.nuget/packages/",
+        "outputPath": "/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Utilities/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/wheel58m/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

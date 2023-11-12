@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.Classes", "Tetris.Classes\Tetris.Classes.csproj", "{7F76846D-3BE0-4003-9542-78ABCE4292EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.Tests", "Tetris.Tests\Tetris.Tests.csproj", "{4E93B6B0-33D6-441B-BADE-1D644BB7E0F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.Main", "Tetris.Main\Tetris.Main.csproj", "{AE447EF5-F7A1-4833-AEFA-EEB48BFF0EA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.Utilities", "Tetris.Utilities\Tetris.Utilities.csproj", "{B6E3E42D-0810-4032-9867-4DC35788CF59}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F76846D-3BE0-4003-9542-78ABCE4292EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F76846D-3BE0-4003-9542-78ABCE4292EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F76846D-3BE0-4003-9542-78ABCE4292EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F76846D-3BE0-4003-9542-78ABCE4292EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E93B6B0-33D6-441B-BADE-1D644BB7E0F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E93B6B0-33D6-441B-BADE-1D644BB7E0F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E93B6B0-33D6-441B-BADE-1D644BB7E0F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E93B6B0-33D6-441B-BADE-1D644BB7E0F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE447EF5-F7A1-4833-AEFA-EEB48BFF0EA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE447EF5-F7A1-4833-AEFA-EEB48BFF0EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE447EF5-F7A1-4833-AEFA-EEB48BFF0EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE447EF5-F7A1-4833-AEFA-EEB48BFF0EA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6E3E42D-0810-4032-9867-4DC35788CF59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6E3E42D-0810-4032-9867-4DC35788CF59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6E3E42D-0810-4032-9867-4DC35788CF59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6E3E42D-0810-4032-9867-4DC35788CF59}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
