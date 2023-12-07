@@ -1,0 +1,11 @@
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/bin/Debug/net7.0/Tetris.Classes.deps.json
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/bin/Debug/net7.0/Tetris.Classes.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/bin/Debug/net7.0/Tetris.Classes.pdb
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/obj/Debug/net7.0/Tetris.Classes.GeneratedMSBuildEditorConfig.editorconfig
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/obj/Debug/net7.0/Tetris.Classes.AssemblyInfoInputs.cache
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/obj/Debug/net7.0/Tetris.Classes.AssemblyInfo.cs
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/obj/Debug/net7.0/Tetris.Classes.csproj.CoreCompileInputs.cache
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/obj/Debug/net7.0/Tetris.Classes.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/obj/Debug/net7.0/refint/Tetris.Classes.dll
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/obj/Debug/net7.0/Tetris.Classes.pdb
+/Users/wheel58m/Library/Mobile Documents/com~apple~CloudDocs/School/Object-Oriented Programming (CS-1410-N01)/Final - Tetris/Tetris.Classes/obj/Debug/net7.0/ref/Tetris.Classes.dll
