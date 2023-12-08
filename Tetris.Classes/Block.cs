@@ -3,12 +3,15 @@ namespace Tetris.Classes;
 
 public class Block {
     public GridCoordinate Position { get; set; } = new GridCoordinate(0, 0);
-    public static string Symbol { get; } = "[ ]";
+    public int LocalID { get; set; } = 0;
+    public string Symbol { get; set; } = "[ ]";
     public Color Color { get; set; } = Green;
 
     // Constructor -------------------------------------------------------------
-    public Block(GridCoordinate position, Color color = Green) {
+    public Block(int id, GridCoordinate position, Color color = Green) {
+        LocalID = id;
         Position = position;
+        Symbol = Settings.Debug.ShowBlockID ? $"[{LocalID}]" : "[ ]";
         Color = color;
     }
 

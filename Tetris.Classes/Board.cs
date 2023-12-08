@@ -5,6 +5,7 @@ public class Board {
     public Block[,] Grid { get; set; } = new Block[10, 30];
     public int Width { get; } = 10;
     public int Height { get; } = 30;
+    public int FallSpeed { get; set; } = 1000;
 
     // Constructor -------------------------------------------------------------
     public Board() {

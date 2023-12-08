@@ -4,7 +4,7 @@ namespace Tetris.Classes;
 public record GridCoordinate(int X, int Y) {
     private static int BorderOffset => 1; // The offset from the border of the grid
     // Methods
-    public (int, int) ConvertToConsoleCoordinate() => (X * Block.Symbol.Length + BorderOffset, Y + 1); // Converts the grid coordinate to a console cursor position
+    public (int, int) ConvertToConsoleCoordinate() => (X * 3 + BorderOffset, Y + 1); // Converts the grid coordinate to a console cursor position
 }
 
 // ENUMS -----------------------------------------------------------------------

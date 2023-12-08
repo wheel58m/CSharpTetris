@@ -10,6 +10,7 @@ public static class Game {
 
         ActiveBoard.GeneratePiece();
         ActiveBoard.ActivePiece.Display();
+        // ActiveBoard.ActivePiece.Fall(ActiveBoard.FallSpeed);
 
         while (true) {
             Console.SetCursorPosition(0, ActiveBoard.Height + 2);
