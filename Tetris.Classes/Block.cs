@@ -25,4 +25,7 @@ public class Block {
         Console.SetCursorPosition(x, y);
         Console.Write("   ");
     }
+    public void Move(int x, int y) {
+        Position = new GridCoordinate(Position.X + x, Position.Y + y);
+    }
 }

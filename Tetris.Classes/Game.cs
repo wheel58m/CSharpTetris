@@ -30,12 +30,34 @@ public static class Game {
             Console.WriteLine($"Orientation: {ActiveBoard.ActivePiece.Orientation}");
 
             ConsoleKeyInfo key = Console.ReadKey(true);
-            if (key.Key == ConsoleKey.Spacebar) {
-                ActiveBoard.ActivePiece.Rotate();
-            } else {
-                ActiveBoard.ActivePiece?.Clear();
-                ActiveBoard.ActivePiece = ActiveBoard.GeneratePiece();
-                ActiveBoard.ActivePiece.Display();
+            // if (key.Key == ConsoleKey.Spacebar) {
+            //     ActiveBoard.ActivePiece.Rotate();
+            // } else {
+            //     ActiveBoard.ActivePiece?.Clear();
+            //     ActiveBoard.ActivePiece = ActiveBoard.GeneratePiece();
+            //     ActiveBoard.ActivePiece.Display();
+            // }
+            switch (key.Key) {
+                case ConsoleKey.Spacebar:
+                    ActiveBoard.ActivePiece.Rotate();
+                    break;
+                case ConsoleKey.LeftArrow:
+                    ActiveBoard.ActivePiece.Move(-1, 0);
+                    break;
+                case ConsoleKey.RightArrow:
+                    ActiveBoard.ActivePiece.Move(1, 0);
+                    break;
+                case ConsoleKey.DownArrow:
+                    ActiveBoard.ActivePiece.Move(0, 1);
+                    break;
+                case ConsoleKey.UpArrow:
+                    ActiveBoard.ActivePiece.Move(0, -1);
+                    break;
+                default:
+                    ActiveBoard.ActivePiece?.Clear();
+                    ActiveBoard.ActivePiece = ActiveBoard.GeneratePiece();
+                    ActiveBoard.ActivePiece.Display();
+                    break;
             }
         }
     }

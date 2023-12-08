@@ -56,7 +56,16 @@ public abstract class Piece {
         Build(Orientation);
         Display();
     }
-    public abstract void Move(int x, int y);
+    public void Move(int x, int y) {
+        Clear();
+        Position = new GridCoordinate(Position.X + x, Position.Y + y);
+
+        foreach (Block block in Blocks) {
+            block.Move(x, y);
+        }
+
+        Display();
+    }
 }
 public class IPiece : Piece {
     // Constructor -------------------------------------------------------------
@@ -93,7 +102,6 @@ public class IPiece : Piece {
                 break;
         }
     }
-    public override void Move(int x, int y) {}
 }
 public class OPiece : Piece {
     // Constructor -------------------------------------------------------------
@@ -108,7 +116,6 @@ public class OPiece : Piece {
         Blocks[2] = new Block(new GridCoordinate(Position.X + 0, Position.Y + 1), Color);
         Blocks[3] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 1), Color);
     }
-    public override void Move(int x, int y) {}
 }
 public class TPiece : Piece {
     // Constructor -------------------------------------------------------------
@@ -146,7 +153,6 @@ public class TPiece : Piece {
         
         }
     }
-    public override void Move(int x, int y) {}
 }
 public class LPiece : Piece {
     // Constructor -------------------------------------------------------------
@@ -183,7 +189,6 @@ public class LPiece : Piece {
                 break;
         }
     }
-    public override void Move(int x, int y) {}
 }
 public class JPiece : Piece {
     // Constructor -------------------------------------------------------------
@@ -220,7 +225,6 @@ public class JPiece : Piece {
                 break;
         }
     }
-    public override void Move(int x, int y) {}
 }
 public class SPiece : Piece {
     // Constructor -------------------------------------------------------------
@@ -257,7 +261,6 @@ public class SPiece : Piece {
                 break;
         }
     }
-    public override void Move(int x, int y) {}
 }
 public class ZPiece : Piece {
     // Constructor -------------------------------------------------------------
@@ -294,5 +297,4 @@ public class ZPiece : Piece {
                 break;
         }
     }
-    public override void Move(int x, int y) {}
 }
