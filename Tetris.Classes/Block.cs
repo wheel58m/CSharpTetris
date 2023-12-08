@@ -11,4 +11,18 @@ public class Block {
         Position = position;
         Color = color;
     }
+
+    // Methods -----------------------------------------------------------------
+    public void Display() {
+        (int x, int y) = Position.ConvertToConsoleCoordinate(); // Convert Position to Cursor Position
+        Console.SetCursorPosition(x, y);
+        Console.ForegroundColor = (ConsoleColor)Color;
+        Console.Write(Symbol);
+        Console.ResetColor();
+    }
+    public void Clear() {
+        (int x, int y) = Position.ConvertToConsoleCoordinate(); // Convert Position to Cursor Position
+        Console.SetCursorPosition(x, y);
+        Console.Write("   ");
+    }
 }

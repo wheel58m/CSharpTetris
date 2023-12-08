@@ -1,2 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿// FINAL: TETRIS ///////////////////////////////////////////////////////////////
+// Author: Austin Wheeler
+// Class: Object-Oriented Programming Lab (CS-1415-N01)
+////////////////////////////////////////////////////////////////////////////////
+using Tetris.Classes;
+
+Game.Run();

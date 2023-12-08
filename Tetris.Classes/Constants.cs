@@ -7,10 +7,14 @@ public struct GridCoordinate {
 
     // Constructor
     public GridCoordinate(int x, int y) => (X, Y) = (x, y);
+
+    // Methods
+    public (int, int) ConvertToConsoleCoordinate() => (X * 3 + 1, Y + 1); // Converts the grid coordinate to a console cursor position
 }
 
 // ENUMS -----------------------------------------------------------------------
 public enum Color { Black, Blue, Green, Cyan, Red, Magenta, Yellow, White, DarkGray } // Colors
+public enum Shape { I, J, L, O, S, T, Z } // Tetromino Shapes
 public enum Orientation { Up, Right, Down, Left } // Orientations
 
 // CLASS VALUES ----------------------------------------------------------------
