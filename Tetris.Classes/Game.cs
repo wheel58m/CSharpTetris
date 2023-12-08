@@ -8,12 +8,35 @@ public static class Game {
         Console.CursorVisible = false; // Hide the Cursor
         ActiveBoard.Display();
 
-        while (true) {
-            ActiveBoard.ActivePiece?.Clear();
-            ActiveBoard.ActivePiece = ActiveBoard.GeneratePiece();
-            ActiveBoard.ActivePiece.Display();
+        ActiveBoard.GeneratePiece();
+        ActiveBoard.ActivePiece.Display();
 
-            Console.ReadKey(true);
+        while (true) {
+            Console.SetCursorPosition(0, ActiveBoard.Grid.GetLength(1) + 2);
+            for (int i = 0; i < 50; i++) {
+                Console.Write(" ");
+            }
+            Console.WriteLine();
+            for (int i = 0; i < 50; i++) {
+                Console.Write(" ");
+            }
+            Console.WriteLine();
+            for (int i = 0; i < 50; i++) {
+                Console.Write(" ");
+            }
+            Console.SetCursorPosition(0, ActiveBoard.Grid.GetLength(1) + 2);
+            Console.WriteLine($"Shape: {ActiveBoard.ActivePiece.Shape}");
+            Console.WriteLine($"Position: ({ActiveBoard.ActivePiece.Position.X}, {ActiveBoard.ActivePiece.Position.Y})");
+            Console.WriteLine($"Orientation: {ActiveBoard.ActivePiece.Orientation}");
+
+            ConsoleKeyInfo key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.Spacebar) {
+                ActiveBoard.ActivePiece.Rotate();
+            } else {
+                ActiveBoard.ActivePiece?.Clear();
+                ActiveBoard.ActivePiece = ActiveBoard.GeneratePiece();
+                ActiveBoard.ActivePiece.Display();
+            }
         }
     }
 }
