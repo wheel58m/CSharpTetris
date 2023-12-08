@@ -27,14 +27,14 @@ public abstract class Piece {
             } catch (NullReferenceException ex) {
                 Console.WriteLine($"NullReferenceException caught: {ex.Message}");
                 Console.WriteLine($"Piece Details: Shape: {Shape}, Block Count: {Blocks.Length}, Color: {Color}, Position: ({Position.X}, {Position.Y}), Orientation: {Orientation}, ActiveBoard: {ActiveBoard}");
-                Console.WriteLine($"Block Details: Position: ({block.Position.X}, {block.Position.Y}), Symbol: {block.Symbol}, Color: {block.Color}");
+                Console.WriteLine($"Block Details: Position: ({block.Position.X}, {block.Position.Y}), Symbol: {Block.Symbol}, Color: {block.Color}");
             } catch (ArgumentOutOfRangeException ex) {
                 Console.WriteLine($"ArgumentOutOfRangeException caught: {ex.Message}");
                 Console.WriteLine($"Piece Details: Shape: {Shape}, Block Count: {Blocks.Length}, Color: {Color}, Position: ({Position.X}, {Position.Y}), Orientation: {Orientation}, ActiveBoard: {ActiveBoard}");
-                Console.WriteLine($"Block Details: Position: ({block.Position.X}, {block.Position.Y}), Symbol: {block.Symbol}, Color: {block.Color}");
+                Console.WriteLine($"Block Details: Position: ({block.Position.X}, {block.Position.Y}), Symbol: {Block.Symbol}, Color: {block.Color}");
             }
         }
-        // Console.SetCursorPosition(0, ActiveBoard.Grid.GetLength(1));
+        // Console.SetCursorPosition(0, ActiveBoard.Height);
     }
     public void Clear() {
         foreach (Block block in Blocks) {
@@ -42,11 +42,11 @@ public abstract class Piece {
             } catch (NullReferenceException ex) {
                 Console.WriteLine($"NullReferenceException caught: {ex.Message}");
                 Console.WriteLine($"Piece Details: Shape: {Shape}, Block Count: {Blocks.Length}, Color: {Color}, Position: ({Position.X}, {Position.Y}), Orientation: {Orientation}, ActiveBoard: {ActiveBoard}");
-                Console.WriteLine($"Block Details: Position: ({block.Position.X}, {block.Position.Y}), Symbol: {block.Symbol}, Color: {block.Color}");
+                Console.WriteLine($"Block Details: Position: ({block.Position.X}, {block.Position.Y}), Symbol: {Block.Symbol}, Color: {block.Color}");
             } catch (ArgumentOutOfRangeException ex) {
                 Console.WriteLine($"ArgumentOutOfRangeException caught: {ex.Message}");
                 Console.WriteLine($"Piece Details: Shape: {Shape}, Block Count: {Blocks.Length}, Color: {Color}, Position: ({Position.X}, {Position.Y}), Orientation: {Orientation}, ActiveBoard: {ActiveBoard}");
-                Console.WriteLine($"Block Details: Position: ({block.Position.X}, {block.Position.Y}), Symbol: {block.Symbol}, Color: {block.Color}");
+                Console.WriteLine($"Block Details: Position: ({block.Position.X}, {block.Position.Y}), Symbol: {Block.Symbol}, Color: {block.Color}");
             }
         }
     }

@@ -1,15 +1,10 @@
 namespace Tetris.Classes;
 
 // STRUCTS ---------------------------------------------------------------------
-public struct GridCoordinate {
-    public int X { get; set; }
-    public int Y { get; set; }
-
-    // Constructor
-    public GridCoordinate(int x, int y) => (X, Y) = (x, y);
-
+public record GridCoordinate(int X, int Y) {
+    private static int BorderOffset => 1; // The offset from the border of the grid
     // Methods
-    public (int, int) ConvertToConsoleCoordinate() => (X * 3 + 1, Y + 1); // Converts the grid coordinate to a console cursor position
+    public (int, int) ConvertToConsoleCoordinate() => (X * Block.Symbol.Length + BorderOffset, Y + 1); // Converts the grid coordinate to a console cursor position
 }
 
 // ENUMS -----------------------------------------------------------------------
@@ -19,7 +14,7 @@ public enum Orientation { Up, Right, Down, Left } // Orientations
 
 // CLASS VALUES ----------------------------------------------------------------
 public static class Constants {
-    public static Dictionary<Color, ConsoleColor> ColorDictionary = new Dictionary<Color, ConsoleColor> {
+    public static readonly Dictionary<Color, ConsoleColor> ColorDictionary = new Dictionary<Color, ConsoleColor> {
         { Color.Black, ConsoleColor.Black },
         { Color.Blue, ConsoleColor.Blue },
         { Color.Green, ConsoleColor.Green },

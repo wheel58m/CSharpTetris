@@ -3,7 +3,7 @@ namespace Tetris.Classes;
 
 public class Block {
     public GridCoordinate Position { get; set; } = new GridCoordinate(0, 0);
-    public string Symbol { get; } = "[ ]";
+    public static string Symbol { get; } = "[ ]";
     public Color Color { get; set; } = Green;
 
     // Constructor -------------------------------------------------------------

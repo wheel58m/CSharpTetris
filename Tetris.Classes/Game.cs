@@ -12,7 +12,7 @@ public static class Game {
         ActiveBoard.ActivePiece.Display();
 
         while (true) {
-            Console.SetCursorPosition(0, ActiveBoard.Grid.GetLength(1) + 2);
+            Console.SetCursorPosition(0, ActiveBoard.Height + 2);
             for (int i = 0; i < 50; i++) {
                 Console.Write(" ");
             }
@@ -24,19 +24,13 @@ public static class Game {
             for (int i = 0; i < 50; i++) {
                 Console.Write(" ");
             }
-            Console.SetCursorPosition(0, ActiveBoard.Grid.GetLength(1) + 2);
+            Console.SetCursorPosition(0, ActiveBoard.Height + 2);
             Console.WriteLine($"Shape: {ActiveBoard.ActivePiece.Shape}");
             Console.WriteLine($"Position: ({ActiveBoard.ActivePiece.Position.X}, {ActiveBoard.ActivePiece.Position.Y})");
             Console.WriteLine($"Orientation: {ActiveBoard.ActivePiece.Orientation}");
 
             ConsoleKeyInfo key = Console.ReadKey(true);
-            // if (key.Key == ConsoleKey.Spacebar) {
-            //     ActiveBoard.ActivePiece.Rotate();
-            // } else {
-            //     ActiveBoard.ActivePiece?.Clear();
-            //     ActiveBoard.ActivePiece = ActiveBoard.GeneratePiece();
-            //     ActiveBoard.ActivePiece.Display();
-            // }
+
             switch (key.Key) {
                 case ConsoleKey.Spacebar:
                     ActiveBoard.ActivePiece.Rotate();
