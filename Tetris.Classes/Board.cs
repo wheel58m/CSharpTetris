@@ -9,7 +9,7 @@ public class Board {
 
     // Constructor -------------------------------------------------------------
     public Board() {
-        ActivePiece = GeneratePiece();
+        ActivePiece = NewPiece();
     }
 
     // Methods -----------------------------------------------------------------
@@ -45,34 +45,79 @@ public class Board {
         }
         Console.WriteLine("╝"); // Bottom Right Corner
     }
-    public Piece GeneratePiece() {
+    public Piece NewPiece() {
         Random random = new();
 
         // Generate a Random Shape
-        int shape = random.Next(1, 8);
+        int shape = random.Next(0, 6);
+        // int shape = 3; // L Piece
 
         // Generate a Random Color
-        int color = random.Next(1, 8);
+        int color = random.Next(0, 8);
 
         // Generate a Random Position
         int x = random.Next(0, 10);
-        // int x = 5;
+        // int x = 9;
         int y = 0;
         GridCoordinate position = new(x, y);
 
         // Generate a Random Orientation
-        int orientation = random.Next(1, 4);
+        int orientation = random.Next(0, 3);
+        // int orientation = 1; // Right
 
-        // Return the new Piece
+        // Set the Active Piece
         return shape switch {
-            1 => new IPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
-            2 => new OPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
-            3 => new TPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
-            4 => new LPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
-            5 => new JPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
-            6 => new SPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
-            7 => new ZPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
+            0 => new IPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
+            1 => new OPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
+            2 => new TPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
+            3 => new LPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
+            4 => new JPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
+            5 => new SPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
+            6 => new ZPiece(position, (Color)color, (Orientation)orientation) { ActiveBoard = this },
             _ => new IPiece(new GridCoordinate(Width / 2, 0)) { ActiveBoard = this },
         };
+    }
+
+    public void GeneratePiece() {
+        // Get Next Active Piece
+        ActivePiece = NewPiece();
+
+        // Enforce Boundaries
+        EnforceBoundary(true);
+
+        // Display Piece
+        ActivePiece.Display();
+    }
+    public void EnforceBoundary(bool fixToTop = false) {
+        // Enforce Left Boundary
+        int minX = ActivePiece.Blocks.Min(block => block.Position.X);
+        if (minX < 0) {
+            ActivePiece.Move(Math.Abs(minX), 0);
+        }
+
+        // Enforce Right Boundary
+        int maxX = ActivePiece.Blocks.Max(block => block.Position.X);
+        if (maxX >= Width) {
+            ActivePiece.Move(Width - maxX, 0);
+        }
+
+        // Fix to Top
+        if (fixToTop) {
+            int minY = ActivePiece.Blocks.Min(block => block.Position.Y);
+            if (minY < 0) {
+                ActivePiece.Move(0, Math.Abs(minY));
+            } else if (minY > 0) {
+                ActivePiece.Move(0, -minY);
+            }
+        }
+    }
+    public bool CheckForCollision(int x, int y) {
+        foreach (Block block in ActivePiece.Blocks) {
+            if (block.Position.X + x < 0 || block.Position.X + x >= Width || block.Position.Y + y < 0 || block.Position.Y + y >= Height) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
