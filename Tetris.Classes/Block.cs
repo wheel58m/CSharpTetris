@@ -20,6 +20,9 @@ public class Block {
         (int x, int y) = Position.ConvertToConsoleCoordinate(); // Convert Position to Cursor Position
         Console.SetCursorPosition(x, y);
         Console.ForegroundColor = Constants.ColorDictionary[Color];
+        if (Utilities.ShowBackground) {
+            Console.BackgroundColor = Constants.ColorDictionary[Color];
+        }
         Console.Write(Symbol);
         Console.ResetColor();
     }

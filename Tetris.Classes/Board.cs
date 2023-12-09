@@ -88,7 +88,7 @@ public class Board {
         // Display Piece
         if (Utilities.Debug.ShowPieceInfo) Utilities.Debug.DisplayPieceInfo(ActivePiece); // Debug: Display Piece Info
         ActivePiece.Display();
-        ActivePiece.Fall(FallSpeed);
+        if (Utilities.Debug.Fall) ActivePiece.Fall(FallSpeed);
     }
     public void EnforceBoundary(bool fixToTop = false) {
         // Enforce Left Boundary
@@ -117,13 +117,27 @@ public class Board {
         foreach (Block block in ActivePiece.Blocks) {
             // Check for Boundary Collision
             if (block.Position.X + x < 0 || block.Position.X + x >= Width || block.Position.Y + y < 0 || block.Position.Y + y >= Height) {
+                return true;
+            }
+            // Check for Block Collision
+            if (Grid[block.Position.X + x, block.Position.Y + y] != null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    public bool CheckForStop() {
+        foreach (Block block in ActivePiece.Blocks) {
+            // Check for Bottom Boundary Collision
+            if (block.Position.Y + 1 >= Height) {
                 foreach (Block stoppedBlock in ActivePiece.Blocks) {
                     Grid[stoppedBlock.Position.X, stoppedBlock.Position.Y] = stoppedBlock;
                 }
                 return true;
             }
-            // Check for Block Collision
-            if (Grid[block.Position.X + x, block.Position.Y + y] != null) {
+            // Check for Y Block Collision
+            if (Grid[block.Position.X, block.Position.Y + 1] != null) {
                 foreach (Block stoppedBlock in ActivePiece.Blocks) {
                     Grid[stoppedBlock.Position.X, stoppedBlock.Position.Y] = stoppedBlock;
                 }

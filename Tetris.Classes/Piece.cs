@@ -79,9 +79,11 @@ public abstract class Piece {
 
         if (rerender) Display();
     }
-
+    public void Drop() {
+        Fall(20);
+    }
     public void Fall(int speed) {
-        while (!ActiveBoard.CheckForCollision(0, 1)) {
+        while (!ActiveBoard.CheckForStop()) {
             Move(0, 1);
             Thread.Sleep(speed);
         }
