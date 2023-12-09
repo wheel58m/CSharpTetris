@@ -2,8 +2,12 @@ namespace Tetris.Classes;
 
 public static class Utilities {
     public static bool ShowBackground { get; set; } = false;
+    public static string DefaultBlockSymbol { get; set; } = $"[ ]";
+    public static string EmptyBlockSymbol { get; set; } = "   ";
+
+    // Debug Tool --------------------------------------------------------------
     public static class Debug {
-        public static bool ShowBlockID { get; set; } = false;
+        public static bool ShowBlockID { get; set; } = true;
         public static bool ShowPieceInfo { get; set; } = true;
         public static bool Fall { get; set; } = false;
         public static void DisplayPieceInfo(Piece piece) {

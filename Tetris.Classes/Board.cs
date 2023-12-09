@@ -2,13 +2,16 @@ namespace Tetris.Classes;
 
 public class Board {
     public Piece ActivePiece { get; set; }
-    public Block[,] Grid { get; set; } = new Block[10, 30];
+    public Grid Grid { get; set; } = new(10, 30);
     public int Width { get; } = 10;
     public int Height { get; } = 30;
     public int FallSpeed { get; set; } = 1000;
 
     // Constructor -------------------------------------------------------------
-    public Board() {
+    public Board(int width = 10, int height = 30) {
+        Width = width;
+        Height = height;
+        Grid = new Grid(Width, Height);
         ActivePiece = RandomPiece();
     }
 
@@ -120,7 +123,7 @@ public class Board {
                 return true;
             }
             // Check for Block Collision
-            if (Grid[block.Position.X + x, block.Position.Y + y] != null) {
+            if (Grid.Rows[block.Position.Y + y].Blocks[block.Position.X + x] != null) {
                 return true;
             }
         }
@@ -132,19 +135,52 @@ public class Board {
             // Check for Bottom Boundary Collision
             if (block.Position.Y + 1 >= Height) {
                 foreach (Block stoppedBlock in ActivePiece.Blocks) {
-                    Grid[stoppedBlock.Position.X, stoppedBlock.Position.Y] = stoppedBlock;
+                    stoppedBlock.Container = Grid.Rows[stoppedBlock.Position.Y];
+                    stoppedBlock.Clear();
+                    Grid.Rows[stoppedBlock.Position.Y].Blocks[stoppedBlock.Position.X] = stoppedBlock;
+                    stoppedBlock.Display();
                 }
                 return true;
             }
             // Check for Y Block Collision
-            if (Grid[block.Position.X, block.Position.Y + 1] != null) {
+            if (Grid.Rows[block.Position.Y + 1].Blocks[block.Position.X] != null) {
                 foreach (Block stoppedBlock in ActivePiece.Blocks) {
-                    Grid[stoppedBlock.Position.X, stoppedBlock.Position.Y] = stoppedBlock;
+                    stoppedBlock.Container = Grid.Rows[stoppedBlock.Position.Y];
+                    stoppedBlock.Clear();
+                    Grid.Rows[stoppedBlock.Position.Y].Blocks[stoppedBlock.Position.X] = stoppedBlock;
+                    stoppedBlock.Display();
                 }
                 return true;
             }
         }
 
         return false;
+    }
+}
+
+public class Grid {
+    public int Width { get; init; } = 10;
+    public int Height { get; init; } = 30;
+    public Row[] Rows { get; set; } = new Row[30];
+
+    // Constructor -------------------------------------------------------------
+    public Grid(int width, int height) {
+        Width = width;
+        Height = height;
+        Rows = new Row[Height];
+
+        // Initialize Rows
+        for (int i = 0; i < Height; i++) {
+            Rows[i] = new Row(Width);
+        }
+    }
+}
+
+public class Row : IBlockContainer {
+    public Block[] Blocks { get; set; } = new Block[10];
+
+    // Constructor -------------------------------------------------------------
+    public Row(int width) {
+        Blocks = new Block[width];
     }
 }
