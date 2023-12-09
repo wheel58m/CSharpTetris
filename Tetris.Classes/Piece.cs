@@ -55,8 +55,8 @@ public abstract class Piece {
 
         // Check if Piece has space to rotate
         if (Shape == Shape.I) {
-            if (Position.X == ActiveBoard.Width - 4 || Position.Y == -1) { return; }
-        } else if (Position.X == 0 || Position.X == ActiveBoard.Width - 1 || Position.Y == 0 || Position.Y == ActiveBoard.Height - 1) {
+            if (Position.X < 0 || Position.X == ActiveBoard.Width - 4 || Position.Y <= -1 || Position.Y > ActiveBoard.Height - 5) { return; }
+        } else if (Position.X <= 0 || Position.X == ActiveBoard.Width - 1 || Position.Y == 0 || Position.Y == ActiveBoard.Height - 1) {
             return; 
         }
         
@@ -65,15 +65,19 @@ public abstract class Piece {
         Build(Orientation);
         Display();
     }
-    public void Move(int x, int y) {
-        Clear();
+    public void Move(int x, int y, bool rerender = true, bool checkForCollision = true) {
+        if (checkForCollision) {
+            if (ActiveBoard.CheckForCollision(x, y)) { return; } // Check for Boundary Collision
+        }
+
+        if (rerender) Clear();
         Position = new GridCoordinate(Position.X + x, Position.Y + y);
 
         foreach (Block block in Blocks) {
             block.Move(x, y);
         }
 
-        Display();
+        if (rerender) Display();
     }
 
     public void Fall(int speed) {

@@ -9,7 +9,7 @@ public class Board {
 
     // Constructor -------------------------------------------------------------
     public Board() {
-        ActivePiece = NewPiece();
+        ActivePiece = RandomPiece();
     }
 
     // Methods -----------------------------------------------------------------
@@ -45,7 +45,7 @@ public class Board {
         }
         Console.WriteLine("╝"); // Bottom Right Corner
     }
-    public Piece NewPiece() {
+    public Piece RandomPiece() {
         Random random = new();
 
         // Generate a Random Shape
@@ -78,9 +78,9 @@ public class Board {
         };
     }
 
-    public void GeneratePiece() {
-        // Get Next Active Piece
-        ActivePiece = NewPiece();
+    public void GeneratePiece(Piece? piece = null) {
+        // Get Random Piece if no Piece is provided
+        ActivePiece = piece ?? RandomPiece();
 
         // Enforce Boundaries
         EnforceBoundary(true);
@@ -92,22 +92,22 @@ public class Board {
         // Enforce Left Boundary
         int minX = ActivePiece.Blocks.Min(block => block.Position.X);
         if (minX < 0) {
-            ActivePiece.Move(Math.Abs(minX), 0);
+            ActivePiece.Move(Math.Abs(minX), 0, false, false);
         }
 
         // Enforce Right Boundary
         int maxX = ActivePiece.Blocks.Max(block => block.Position.X);
         if (maxX >= Width) {
-            ActivePiece.Move(Width - maxX, 0);
+            ActivePiece.Move(Width - maxX - 1, 0, false, false);
         }
 
         // Fix to Top
         if (fixToTop) {
             int minY = ActivePiece.Blocks.Min(block => block.Position.Y);
             if (minY < 0) {
-                ActivePiece.Move(0, Math.Abs(minY));
+                ActivePiece.Move(0, Math.Abs(minY), false, false);
             } else if (minY > 0) {
-                ActivePiece.Move(0, -minY);
+                ActivePiece.Move(0, -minY, false, false);
             }
         }
     }

@@ -9,7 +9,8 @@ public static class Game {
         ActiveBoard = new Board();
         ActiveBoard.Display();
 
-        ActiveBoard.GeneratePiece();
+        // ActiveBoard.GeneratePiece();
+        ActiveBoard.GeneratePiece(new IPiece(new GridCoordinate(5, -2), Color.Blue, Orientation.Down));
         // ActiveBoard.ActivePiece = new ZPiece(new GridCoordinate(1, 1), Color.Green);
         // ActiveBoard.ActivePiece.Display();
         // ActiveBoard.ActivePiece?.Fall(ActiveBoard.FallSpeed);
