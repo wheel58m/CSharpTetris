@@ -11,7 +11,7 @@ public class Block {
     public Block(int id, GridCoordinate position, Color color = Green) {
         LocalID = id;
         Position = position;
-        Symbol = Settings.Debug.ShowBlockID ? $"[{LocalID}]" : "[ ]";
+        Symbol = Utilities.Debug.ShowBlockID ? $"[{LocalID}]" : "[ ]";
         Color = color;
     }
 
@@ -19,7 +19,7 @@ public class Block {
     public void Display() {
         (int x, int y) = Position.ConvertToConsoleCoordinate(); // Convert Position to Cursor Position
         Console.SetCursorPosition(x, y);
-        Console.ForegroundColor = (ConsoleColor)Color;
+        Console.ForegroundColor = Constants.ColorDictionary[Color];
         Console.Write(Symbol);
         Console.ResetColor();
     }

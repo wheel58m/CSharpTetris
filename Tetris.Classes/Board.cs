@@ -53,7 +53,7 @@ public class Board {
         // int shape = 3; // L Piece
 
         // Generate a Random Color
-        int color = random.Next(0, 8);
+        int color = random.Next(0, 7);
 
         // Generate a Random Position
         int x = random.Next(0, 10);

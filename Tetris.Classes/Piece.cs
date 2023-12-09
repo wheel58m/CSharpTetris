@@ -51,6 +51,15 @@ public abstract class Piece {
         }
     }
     public void Rotate() {
+        if (Shape == Shape.O) { return; } // O Piece is a Square and does not need to be rotated
+
+        // Check if Piece has space to rotate
+        if (Shape == Shape.I) {
+            if (Position.X == ActiveBoard.Width - 4 || Position.Y == -1) { return; }
+        } else if (Position.X == 0 || Position.X == ActiveBoard.Width - 1 || Position.Y == 0 || Position.Y == ActiveBoard.Height - 1) {
+            return; 
+        }
+        
         Clear();
         Orientation = (Orientation)(((int)Orientation == 3 ? 0 : (int)Orientation + 1) % 4);
         Build(Orientation);

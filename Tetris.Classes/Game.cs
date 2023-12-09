@@ -16,21 +16,15 @@ public static class Game {
 
         while (true) {
             Console.SetCursorPosition(0, ActiveBoard.Height + 2);
-            for (int i = 0; i < 50; i++) {
-                Console.Write(" ");
-            }
-            Console.WriteLine();
-            for (int i = 0; i < 50; i++) {
-                Console.Write(" ");
-            }
-            Console.WriteLine();
-            for (int i = 0; i < 50; i++) {
-                Console.Write(" ");
-            }
+            Utilities.ClearLine();
+            Utilities.ClearLine();
+            Utilities.ClearLine();
+            Utilities.ClearLine();
             Console.SetCursorPosition(0, ActiveBoard.Height + 2);
             Console.WriteLine($"Shape: {ActiveBoard.ActivePiece?.Shape}");
             Console.WriteLine($"Position: ({ActiveBoard.ActivePiece?.Position.X}, {ActiveBoard.ActivePiece?.Position.Y})");
             Console.WriteLine($"Orientation: {ActiveBoard.ActivePiece?.Orientation}");
+            Console.WriteLine($"Color: {ActiveBoard.ActivePiece?.Color} ({(int)ActiveBoard?.ActivePiece?.Color!})");
 
             ConsoleKeyInfo key = Console.ReadKey(true);
 

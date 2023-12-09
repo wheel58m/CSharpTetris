@@ -8,14 +8,13 @@ public record GridCoordinate(int X, int Y) {
 }
 
 // ENUMS -----------------------------------------------------------------------
-public enum Color { Black, Blue, Green, Cyan, Red, Magenta, Yellow, White, DarkGray } // Colors
+public enum Color { Blue, Green, Cyan, Red, Magenta, Yellow, White, DarkGray } // Colors
 public enum Shape { I, O, T, L, J, S, Z } // Tetromino Shapes
 public enum Orientation { Up, Right, Down, Left } // Orientations
 
 // CLASS VALUES ----------------------------------------------------------------
 public static class Constants {
     public static readonly Dictionary<Color, ConsoleColor> ColorDictionary = new Dictionary<Color, ConsoleColor> {
-        { Color.Black, ConsoleColor.Black },
         { Color.Blue, ConsoleColor.Blue },
         { Color.Green, ConsoleColor.Green },
         { Color.Cyan, ConsoleColor.Cyan },
