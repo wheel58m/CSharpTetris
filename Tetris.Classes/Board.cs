@@ -86,7 +86,9 @@ public class Board {
         EnforceBoundary(true);
 
         // Display Piece
+        if (Utilities.Debug.ShowPieceInfo) Utilities.Debug.DisplayPieceInfo(ActivePiece); // Debug: Display Piece Info
         ActivePiece.Display();
+        ActivePiece.Fall(FallSpeed);
     }
     public void EnforceBoundary(bool fixToTop = false) {
         // Enforce Left Boundary
@@ -113,7 +115,18 @@ public class Board {
     }
     public bool CheckForCollision(int x, int y) {
         foreach (Block block in ActivePiece.Blocks) {
+            // Check for Boundary Collision
             if (block.Position.X + x < 0 || block.Position.X + x >= Width || block.Position.Y + y < 0 || block.Position.Y + y >= Height) {
+                foreach (Block stoppedBlock in ActivePiece.Blocks) {
+                    Grid[stoppedBlock.Position.X, stoppedBlock.Position.Y] = stoppedBlock;
+                }
+                return true;
+            }
+            // Check for Block Collision
+            if (Grid[block.Position.X + x, block.Position.Y + y] != null) {
+                foreach (Block stoppedBlock in ActivePiece.Blocks) {
+                    Grid[stoppedBlock.Position.X, stoppedBlock.Position.Y] = stoppedBlock;
+                }
                 return true;
             }
         }

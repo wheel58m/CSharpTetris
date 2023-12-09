@@ -81,10 +81,12 @@ public abstract class Piece {
     }
 
     public void Fall(int speed) {
-        while (true) {
+        while (!ActiveBoard.CheckForCollision(0, 1)) {
             Move(0, 1);
             Thread.Sleep(speed);
         }
+
+        ActiveBoard.GeneratePiece();
     }
 }
 public class IPiece : Piece {
