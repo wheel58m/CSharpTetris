@@ -2,9 +2,11 @@ namespace Tetris.Classes;
 
 // STRUCTS ---------------------------------------------------------------------
 public record GridCoordinate(int X, int Y) {
-    private static int BorderOffset => 1; // The offset from the border of the grid
+    private int BorderXOffset => X < 0 ? -1 : 1; // The x offset from the border of the grid
+    private int BorderYOffset => Y < 0 ? -1 : 1; // The y offset from the border of the grid
+
     // Methods
-    public (int, int) ConvertToConsoleCoordinate() => (X * 3 + BorderOffset, Y + 1); // Converts the grid coordinate to a console cursor position
+    public (int, int) ConvertToConsoleCoordinate() => (X * 3 + BorderXOffset, Y + BorderYOffset); // Converts the grid coordinate to a console cursor position
 }
 
 // ENUMS -----------------------------------------------------------------------

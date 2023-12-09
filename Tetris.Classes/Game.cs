@@ -20,7 +20,7 @@ public static class Game {
 
                 switch (key.Key) {
                     case ConsoleKey.Spacebar:
-                        ActiveBoard.ActivePiece?.Rotate();
+                        ActiveBoard.ActivePiece?.Drop();
                         continue;
                     case ConsoleKey.LeftArrow:
                         ActiveBoard.ActivePiece?.Move(-1, 0);
@@ -29,10 +29,10 @@ public static class Game {
                         ActiveBoard.ActivePiece?.Move(1, 0);
                         continue;
                     case ConsoleKey.DownArrow:
-                        ActiveBoard.ActivePiece?.Drop();
+                        ActiveBoard.ActivePiece?.Move(0, 1);
                         continue;
                     case ConsoleKey.UpArrow:
-                        ActiveBoard.ActivePiece?.Move(0, -1);
+                        ActiveBoard.ActivePiece?.Rotate();
                         continue;
                     default:
                         break;
