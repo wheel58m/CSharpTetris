@@ -157,30 +157,3 @@ public class Board {
         return false;
     }
 }
-
-public class Grid {
-    public int Width { get; init; } = 10;
-    public int Height { get; init; } = 30;
-    public Row[] Rows { get; set; } = new Row[30];
-
-    // Constructor -------------------------------------------------------------
-    public Grid(int width, int height) {
-        Width = width;
-        Height = height;
-        Rows = new Row[Height];
-
-        // Initialize Rows
-        for (int i = 0; i < Height; i++) {
-            Rows[i] = new Row(Width);
-        }
-    }
-}
-
-public class Row : IBlockContainer {
-    public Block[] Blocks { get; set; } = new Block[10];
-
-    // Constructor -------------------------------------------------------------
-    public Row(int width) {
-        Blocks = new Block[width];
-    }
-}

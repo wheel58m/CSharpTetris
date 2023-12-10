@@ -35,8 +35,15 @@ public static class Game {
                         ActiveBoard.ActivePiece?.Rotate();
                         continue;
                     default:
+                        ActiveBoard.ActivePiece?.Clear();
+                        ActiveBoard.GeneratePiece();
                         break;
                 }
+            }
+
+            if (ActiveBoard.Grid.CheckForCompleteRows()) {
+                ActiveBoard.Grid.ClearRows();
+                ActiveBoard.Grid.DropRows();
             }
         }
     }
