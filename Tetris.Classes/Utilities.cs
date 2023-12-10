@@ -8,8 +8,8 @@ public static class Utilities {
     // Debug Tool --------------------------------------------------------------
     public static class Debug {
         public static bool ShowBlockID { get; set; } = true;
-        public static bool ShowPieceInfo { get; set; } = false;
-        public static bool Fall { get; set; } = false;
+        public static bool ShowPieceInfo { get; set; } = true;
+        public static bool Fall { get; set; } = true;
         public static void DisplayPieceInfo(Piece piece) {
             Console.SetCursorPosition(0, piece.ActiveBoard.Height + 2);
             ClearLine();

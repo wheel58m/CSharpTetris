@@ -29,6 +29,7 @@ public abstract class Piece : IBlockContainer {
                 HandleException(ex, block);
             }
         }
+        Utilities.Debug.DisplayPieceInfo(this);
     }
     public void Clear() {
         foreach (Block block in Blocks) {
@@ -40,11 +41,6 @@ public abstract class Piece : IBlockContainer {
         }
     }
     public virtual void Rotate() {
-        // Check If Rotation Will Exceed Board Boundary
-        if (Position.X <= 0 || Position.X == ActiveBoard.Width - 1 || Position.Y == 0 || Position.Y == ActiveBoard.Height - 1) {
-            return; 
-        }
-        
         Clear();
         Orientation = (Orientation)(((int)Orientation == 3 ? 0 : (int)Orientation + 1) % 4);
         Build(Orientation);
@@ -72,6 +68,14 @@ public abstract class Piece : IBlockContainer {
             Move(0, 1);
             Thread.Sleep(speed);
         }
+    }
+    public virtual bool CanRotate() {
+        // Check If Rotation Will Exceed Board Boundary
+        if (Position.X <= 0 || Position.X == ActiveBoard.Width - 1 || Position.Y == 0 || Position.Y == ActiveBoard.Height - 1) {
+            return false; 
+        }
+
+        return true;
     }
 
     // Debug Methods -----------------------------------------------------------
@@ -127,7 +131,7 @@ public class IPiece : Piece {
         }
     }
     public override void Rotate() {
-        if (Position.X < 0 || Position.X == ActiveBoard.Width - 4 || Position.Y <= -1 || Position.Y > ActiveBoard.Height - 5) { return; }
+        if (Position.X < 0 || Position.X == ActiveBoard.Width - 4 || Position.Y < 0 || Position.Y > ActiveBoard.Height - 5) { return; }
 
         base.Rotate(); // Call the base Rotate method to rotate the piece
     }
