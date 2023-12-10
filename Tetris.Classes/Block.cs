@@ -2,16 +2,14 @@
 namespace Tetris.Classes;
 
 public class Block {
-    public IBlockContainer Container { get; set; } = null!;
-    public GridCoordinate Position { get; set; } = new GridCoordinate(0, 0);
-    private int LocalID { get; set; } = 0;
-    private string Symbol { get; init; } = Utilities.DefaultBlockSymbol;
-    private Color Color { get; set; } = Green;
+    public IBlockContainer? Container { get; set; }
+    public GridCoordinate Position { get; set; }
+    private string Symbol { get; init; }
+    private Color Color { get; set; }
 
     // Constructor -------------------------------------------------------------
-    public Block(int id, GridCoordinate position, Color color = Green, IBlockContainer container = null!) {
+    public Block(GridCoordinate position, Color color = Green, IBlockContainer container = null!) {
         Container = container;
-        LocalID = id;
         Position = position;
         Symbol = Utilities.DefaultBlockSymbol;
         Color = color;
@@ -27,7 +25,7 @@ public class Block {
             Console.BackgroundColor = Constants.ColorDictionary[Color];
         }
         if (Utilities.Debug.ShowBlockID && Container != null) {
-            Console.Write($"[{Array.IndexOf(Container.Blocks, this)}]");
+            Console.Write($"[{GetID()}]");
         } else {  
             Console.Write(Symbol);
         }
@@ -35,8 +33,6 @@ public class Block {
         Console.ResetColor();
     }
     public void Clear() {
-        UpdateID();
-        
         (int x, int y) = Position.ConvertToConsoleCoordinate(); // Convert Position to Cursor Position
         Console.SetCursorPosition(x, y);
         Console.Write(Utilities.EmptyBlockSymbol);
@@ -49,7 +45,5 @@ public class Block {
     public void DisplayBlockInfo() {
         Console.WriteLine($"Block Details: Position: ({Position.X}, {Position.Y}), Symbol: {Symbol}, Color: {Color}");
     }
-    public void UpdateID() {
-        if (Container != null) LocalID = Array.IndexOf(Container.Blocks, this);
-    }
+    public int GetID() => Container == null ? 0 : Array.IndexOf(Container.Blocks, this);
 }

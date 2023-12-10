@@ -23,40 +23,25 @@ public abstract class Piece : IBlockContainer {
     public abstract void Build(Orientation orientation);
     public void Display() {
         foreach (Block block in Blocks) {
-            try { block.Display();
-            } catch (NullReferenceException ex) {
-                Console.WriteLine($"NullReferenceException caught: {ex.Message}");
-                DisplayPieceInfo();
-                block.DisplayBlockInfo();
-            } catch (ArgumentOutOfRangeException ex) {
-                Console.WriteLine($"ArgumentOutOfRangeException caught: {ex.Message}");
-                DisplayPieceInfo();
-                block.DisplayBlockInfo();
+            try {
+                block.Display();
+            } catch (Exception ex) when (ex is NullReferenceException || ex is ArgumentOutOfRangeException) {
+                HandleException(ex, block);
             }
         }
-        // Console.SetCursorPosition(0, ActiveBoard.Height);
     }
     public void Clear() {
         foreach (Block block in Blocks) {
-            try { block.Clear();
-            } catch (NullReferenceException ex) {
-                Console.WriteLine($"NullReferenceException caught: {ex.Message}");
-                DisplayPieceInfo();
-                block.DisplayBlockInfo();
-            } catch (ArgumentOutOfRangeException ex) {
-                Console.WriteLine($"ArgumentOutOfRangeException caught: {ex.Message}");
-                DisplayPieceInfo();
-                block.DisplayBlockInfo();
+            try {
+                block.Clear();
+            } catch (Exception ex) when (ex is NullReferenceException || ex is ArgumentOutOfRangeException) {
+                HandleException(ex, block);
             }
         }
     }
-    public void Rotate() {
-        if (Shape == Shape.O) { return; } // O Piece is a Square and does not need to be rotated
-
-        // Check if Piece has space to rotate
-        if (Shape == Shape.I) {
-            if (Position.X < 0 || Position.X == ActiveBoard.Width - 4 || Position.Y <= -1 || Position.Y > ActiveBoard.Height - 5) { return; }
-        } else if (Position.X <= 0 || Position.X == ActiveBoard.Width - 1 || Position.Y == 0 || Position.Y == ActiveBoard.Height - 1) {
+    public virtual void Rotate() {
+        // Check If Rotation Will Exceed Board Boundary
+        if (Position.X <= 0 || Position.X == ActiveBoard.Width - 1 || Position.Y == 0 || Position.Y == ActiveBoard.Height - 1) {
             return; 
         }
         
@@ -87,14 +72,19 @@ public abstract class Piece : IBlockContainer {
             Move(0, 1);
             Thread.Sleep(speed);
         }
-
-        ActiveBoard.GeneratePiece();
     }
 
     // Debug Methods -----------------------------------------------------------
+    #region Debug Methods
+    public void HandleException(Exception ex, Block block) {
+        Console.WriteLine($"{ex.GetType().Name} caught: {ex.Message}");
+        DisplayPieceInfo();
+        block?.DisplayBlockInfo();
+    }
     public void DisplayPieceInfo() {
         Console.WriteLine($"Piece Details: Shape: {Shape}, Block Count: {Blocks.Length}, Color: {Color}, Position: ({Position.X}, {Position.Y}), Orientation: {Orientation}, ActiveBoard: {ActiveBoard}");
     }
+    #endregion
 }
 public class IPiece : Piece {
     // Constructor -------------------------------------------------------------
@@ -108,33 +98,38 @@ public class IPiece : Piece {
         switch (orientation) {
             case Up: // Horizontal Top
                 // Position is Top Left Corner of Rotation Box
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X + 0, Position.Y + 1), Color, this); // Origin: Left Block (Up Orientation)
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X + 2, Position.Y + 1), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X + 3, Position.Y + 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X + 0, Position.Y + 1), Color, this); // Origin: Left Block (Up Orientation)
+                Blocks[1] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X + 2, Position.Y + 1), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X + 3, Position.Y + 1), Color, this);
                 break;
             case Right: // Vertical Right
                 // Position is Top Left Corner of Rotation Box
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X + 2, Position.Y + 0), Color, this); // Origin: Left Block (Up Orientation) – Top Block
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X + 2, Position.Y + 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X + 2, Position.Y + 2), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X + 2, Position.Y + 3), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X + 2, Position.Y + 0), Color, this); // Origin: Left Block (Up Orientation) – Top Block
+                Blocks[1] = new Block(new GridCoordinate(Position.X + 2, Position.Y + 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X + 2, Position.Y + 2), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X + 2, Position.Y + 3), Color, this);
                 break;
             case Down: // Horizontal Bottom
                 // Position is Top Left Corner of Rotation Box
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X + 3, Position.Y + 2), Color, this); // Origin: Left Block (Up Orientation) – Right Block
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X + 2, Position.Y + 2), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X + 1, Position.Y + 2), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X + 0, Position.Y + 2), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X + 3, Position.Y + 2), Color, this); // Origin: Left Block (Up Orientation) – Right Block
+                Blocks[1] = new Block(new GridCoordinate(Position.X + 2, Position.Y + 2), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 2), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X + 0, Position.Y + 2), Color, this);
                 break;
             case Left: // Vertical Left
                // Position is Top Left Corner of Rotation Box
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X + 1, Position.Y + 3), Color, this); // Origin: Left Block (Up Orientation) – Bottom Block
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X + 1, Position.Y + 2), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X + 1, Position.Y + 0), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 3), Color, this); // Origin: Left Block (Up Orientation) – Bottom Block
+                Blocks[1] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 2), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 0), Color, this);
                 break;
         }
+    }
+    public override void Rotate() {
+        if (Position.X < 0 || Position.X == ActiveBoard.Width - 4 || Position.Y <= -1 || Position.Y > ActiveBoard.Height - 5) { return; }
+
+        base.Rotate(); // Call the base Rotate method to rotate the piece
     }
 }
 public class OPiece : Piece {
@@ -145,11 +140,12 @@ public class OPiece : Piece {
 
     // Methods -----------------------------------------------------------------
     public override void Build(Orientation orientation) {
-        Blocks[0] = new Block(0, new GridCoordinate(Position.X + 0, Position.Y + 0), Color, this);
-        Blocks[1] = new Block(1, new GridCoordinate(Position.X + 1, Position.Y + 0), Color, this);
-        Blocks[2] = new Block(2, new GridCoordinate(Position.X + 0, Position.Y + 1), Color, this);
-        Blocks[3] = new Block(3, new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
+        Blocks[0] = new Block(new GridCoordinate(Position.X + 0, Position.Y + 0), Color, this);
+        Blocks[1] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 0), Color, this);
+        Blocks[2] = new Block(new GridCoordinate(Position.X + 0, Position.Y + 1), Color, this);
+        Blocks[3] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
     }
+    public override void Rotate() { }
 }
 public class TPiece : Piece {
     // Constructor -------------------------------------------------------------
@@ -161,28 +157,28 @@ public class TPiece : Piece {
     public override void Build(Orientation orientation) {
         switch (orientation) {
             case Up: // ⊤
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X - 1, Position.Y), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X + 1, Position.Y), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X, Position.Y + 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X - 1, Position.Y), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X + 1, Position.Y), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X, Position.Y + 1), Color, this);
                 break;
             case Right: // ⊣
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X, Position.Y - 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X, Position.Y + 1), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X - 1, Position.Y), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X, Position.Y - 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X, Position.Y + 1), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X - 1, Position.Y), Color, this);
                 break;
             case Down: // ⊥
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X + 1, Position.Y), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X - 1, Position.Y), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X, Position.Y - 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X + 1, Position.Y), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X - 1, Position.Y), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X, Position.Y - 1), Color, this);
                 break;
             case Left: // ⊢
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X, Position.Y + 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X, Position.Y - 1), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X + 1, Position.Y), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X, Position.Y + 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X, Position.Y - 1), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X + 1, Position.Y), Color, this);
                 break;
         }
     }
@@ -197,28 +193,28 @@ public class LPiece : Piece {
     public override void Build(Orientation orientation) {
         switch (orientation) {
             case Up:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X, Position.Y - 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X, Position.Y + 1), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X, Position.Y - 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X, Position.Y + 1), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
                 break;
             case Right:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X + 1, Position.Y), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X - 1, Position.Y), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X - 1, Position.Y + 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X + 1, Position.Y), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X - 1, Position.Y), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X - 1, Position.Y + 1), Color, this);
                 break;
             case Down:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X, Position.Y + 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X, Position.Y - 1), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X - 1, Position.Y - 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X, Position.Y + 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X, Position.Y - 1), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X - 1, Position.Y - 1), Color, this);
                 break;
             case Left:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X - 1, Position.Y), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X + 1, Position.Y), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X + 1, Position.Y - 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X - 1, Position.Y), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X + 1, Position.Y), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X + 1, Position.Y - 1), Color, this);
                 break;
         }
     }
@@ -233,28 +229,28 @@ public class JPiece : Piece {
     public override void Build(Orientation orientation) {
         switch (orientation) {
             case Up:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X, Position.Y - 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X, Position.Y + 1), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X - 1, Position.Y + 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X, Position.Y - 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X, Position.Y + 1), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X - 1, Position.Y + 1), Color, this);
                 break;
             case Right:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X + 1, Position.Y), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X - 1, Position.Y), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X - 1, Position.Y - 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X + 1, Position.Y), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X - 1, Position.Y), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X - 1, Position.Y - 1), Color, this);
                 break;
             case Down:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X, Position.Y + 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X, Position.Y - 1), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X + 1, Position.Y - 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X, Position.Y + 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X, Position.Y - 1), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X + 1, Position.Y - 1), Color, this);
                 break;
             case Left:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X - 1, Position.Y), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X + 1, Position.Y), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X - 1, Position.Y), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X + 1, Position.Y), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
                 break;
         }
     }
@@ -269,28 +265,28 @@ public class SPiece : Piece {
     public override void Build(Orientation orientation) {
         switch (orientation) {
             case Up:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X - 1, Position.Y), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X, Position.Y - 1), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X + 1, Position.Y - 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X - 1, Position.Y), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X, Position.Y - 1), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X + 1, Position.Y - 1), Color, this);
                 break;
             case Right:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X, Position.Y - 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X + 1, Position.Y), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X, Position.Y - 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X + 1, Position.Y), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
                 break;
             case Down:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X + 1, Position.Y), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X, Position.Y + 1), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X - 1, Position.Y + 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X + 1, Position.Y), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X, Position.Y + 1), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X - 1, Position.Y + 1), Color, this);
                 break;
             case Left:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X, Position.Y + 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X - 1, Position.Y), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X - 1, Position.Y - 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X, Position.Y + 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X - 1, Position.Y), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X - 1, Position.Y - 1), Color, this);
                 break;
         }
     }
@@ -306,28 +302,28 @@ public class ZPiece : Piece {
         // All block positions are the rotated positions of the Up orientation
         switch (orientation) {
             case Up:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X - 1, Position.Y - 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X, Position.Y - 1), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X + 1, Position.Y), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X - 1, Position.Y - 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X, Position.Y - 1), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X + 1, Position.Y), Color, this);
                 break;
             case Right:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X + 1, Position.Y - 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X + 1, Position.Y), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X, Position.Y + 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X + 1, Position.Y - 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X + 1, Position.Y), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X, Position.Y + 1), Color, this);
                 break;
             case Down:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X, Position.Y + 1), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X - 1, Position.Y), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X + 1, Position.Y + 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X, Position.Y + 1), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X - 1, Position.Y), Color, this);
                 break;
             case Left:
-                Blocks[0] = new Block(0, new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
-                Blocks[1] = new Block(1, new GridCoordinate(Position.X - 1, Position.Y + 1), Color, this);
-                Blocks[2] = new Block(2, new GridCoordinate(Position.X - 1, Position.Y), Color, this);
-                Blocks[3] = new Block(3, new GridCoordinate(Position.X, Position.Y - 1), Color, this);
+                Blocks[0] = new Block(new GridCoordinate(Position.X, Position.Y), Color, this); // Origin: Pivot Point
+                Blocks[1] = new Block(new GridCoordinate(Position.X - 1, Position.Y + 1), Color, this);
+                Blocks[2] = new Block(new GridCoordinate(Position.X - 1, Position.Y), Color, this);
+                Blocks[3] = new Block(new GridCoordinate(Position.X, Position.Y - 1), Color, this);
                 break;
         }
     }
