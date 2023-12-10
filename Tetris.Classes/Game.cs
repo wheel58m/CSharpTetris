@@ -35,25 +35,24 @@ public static class Game {
     }
     public static void ProcessUserInput(ConsoleKeyInfo key) {
         switch (key.Key) {
-            case ConsoleKey.Spacebar:
-                ActiveBoard.ActivePiece?.Drop();
-                break;
             case ConsoleKey.LeftArrow:
-            case ConsoleKey.A:
+            case ConsoleKey.A: // Debug Control
                 ActiveBoard.ActivePiece?.Move(-1, 0);
                 break;
             case ConsoleKey.RightArrow:
-            case ConsoleKey.D:
+            case ConsoleKey.D: // Debug Control
                 ActiveBoard.ActivePiece?.Move(1, 0);
                 break;
             case ConsoleKey.DownArrow:
-            case ConsoleKey.S:
+                ActiveBoard.ActivePiece?.Drop();
+                break;
+            case ConsoleKey.S: // Debug Control
                 ActiveBoard.ActivePiece?.Move(0, 1);
                 break;
             case ConsoleKey.UpArrow:
                 ActiveBoard.ActivePiece?.Rotate();
                 break;
-            case ConsoleKey.W:
+            case ConsoleKey.W: // Debug Control
                 ActiveBoard.ActivePiece?.Move(0, -1);
                 break;
             default:
