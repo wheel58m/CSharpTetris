@@ -89,7 +89,6 @@ public class Board {
         EnforceBoundary(true);
 
         // Display Piece
-        if (Utilities.Debug.ShowPieceInfo) Utilities.Debug.DisplayPieceInfo(ActivePiece); // Debug: Display Piece Info
         ActivePiece.Display();
         if (Utilities.Debug.Fall) ActivePiece.Fall(FallSpeed);
     }

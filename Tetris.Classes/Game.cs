@@ -7,6 +7,7 @@ public static class Game {
     public static void Run() {
         Console.CursorVisible = false; // Hide the Cursor
 
+        // Set & Display Board
         ActiveBoard = new Board();
         ActiveBoard.Display();
 
@@ -21,6 +22,7 @@ public static class Game {
 
         while (true) {
             ActiveBoard.GeneratePiece();
+            ShowDebugInfo();
 
             while (!ActiveBoard.CheckForStop()) {
                 ConsoleKeyInfo key = Console.ReadKey(true);
@@ -30,6 +32,7 @@ public static class Game {
             if (ActiveBoard.Grid.CheckForCompleteRows()) {
                 ActiveBoard.Grid.ClearRows();
                 ActiveBoard.Grid.DropRows();
+                ActiveBoard.FallSpeed = ActiveBoard.FallSpeed - 10; // Increase Speed
             }
         }
     }
@@ -59,6 +62,22 @@ public static class Game {
                 ActiveBoard.ActivePiece?.Clear();
                 ActiveBoard.GeneratePiece();
                 break;
+        }
+    }
+    public static void ShowDebugInfo() {
+        if (Utilities.Debug.ShowDebugInfo) {
+            switch (Utilities.Debug.DebugInfo) {
+                case DebugItem.Game:
+                    break;
+                case DebugItem.Board:
+                    Utilities.Debug.DisplayBoardInfo(ActiveBoard);
+                    break;
+                case DebugItem.Piece:
+                    Utilities.Debug.DisplayPieceInfo(ActiveBoard.ActivePiece);
+                    break;
+                case DebugItem.Block:
+                    break;
+            }
         }
     }
 }

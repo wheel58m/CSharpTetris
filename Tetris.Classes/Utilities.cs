@@ -3,14 +3,24 @@ namespace Tetris.Classes;
 
 public static class Utilities {
     public static bool ShowBackground { get; set; } = false;
-    public static string DefaultBlockSymbol { get; set; } = $"[ ]";
+    public static string DefaultBlockSymbol { get; set; } = $"[#]";
     public static string EmptyBlockSymbol { get; set; } = "   ";
 
     // Debug Tool --------------------------------------------------------------
     public static class Debug {
-        public static bool ShowBlockID { get; set; } = false;
-        public static bool ShowPieceInfo { get; set; } = true;
+        public static bool ShowBlockID { get; set; } = true;
+        public static bool ShowDebugInfo { get; set; } = true;
+        public static DebugItem DebugInfo { get; set; } = DebugItem.Piece;
         public static bool Fall { get; set; } = true;
+        public static void DisplayBoardInfo(Board board) {
+            Console.SetCursorPosition(0, board.Height + 2);
+            ClearLine();
+            ClearLine();
+            ClearLine();
+            ClearLine();
+            Console.SetCursorPosition(0, board.Height + 2);
+            Console.WriteLine($"Fallspeed: {board.FallSpeed}");   
+        }
         public static void DisplayPieceInfo(Piece piece) {
             Console.SetCursorPosition(0, piece.ActiveBoard.Height + 2);
             ClearLine();
@@ -54,3 +64,5 @@ public static class Utilities {
         Console.ResetColor();
     }
 }
+
+public enum DebugItem { Game, Board, Piece, Block }

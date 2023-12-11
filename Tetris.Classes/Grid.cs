@@ -1,4 +1,3 @@
-using System.Linq;
 namespace Tetris.Classes;
 
 public class Grid {
@@ -30,6 +29,7 @@ public class Grid {
         }
 
         CompleteRows.Clear(); // Empty List of Complete Rows
+
     }
     public void DropRows() {
         // Check If Each Row Is Empty (Starting From Bottom) & Move Contents Down
