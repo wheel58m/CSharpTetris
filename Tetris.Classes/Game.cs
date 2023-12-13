@@ -43,7 +43,7 @@ private static void GameLoop() {
             Score += ActiveBoard.Grid.CompleteRows.Count * ActiveBoard.Grid.Width; // Update Score
             ActiveBoard.Grid.ClearRows();
             ActiveBoard.Grid.DropRows();
-            ActiveBoard.FallSpeed = ActiveBoard.FallSpeed - 10; // Increase Speed
+            ActiveBoard.FallSpeed = ActiveBoard.FallSpeed == 200 ? 200 : ActiveBoard.FallSpeed - 10; // Increase Speed
         }
         else {
             ActiveBoard.GeneratePiece();
@@ -116,7 +116,7 @@ private static void GameLoop() {
         }
     }
 
-    public static void ShowDebugInfo() {
+    public static void ShowGameInfo() {
         lock (lockObject) {
             if (Utilities.Debug.ShowDebugInfo) {
                 switch (Utilities.Debug.DebugInfo) {
@@ -135,6 +135,7 @@ private static void GameLoop() {
             } else {
                 Utilities.Debug.ClearInfo();
                 Console.SetCursorPosition(0, ActiveBoard.Height + 2);
+                Console.WriteLine($"Fallspeed: {ActiveBoard.FallSpeed}");
                 Console.WriteLine($"Score: {Score}");
             }
         }

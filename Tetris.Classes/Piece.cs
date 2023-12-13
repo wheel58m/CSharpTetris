@@ -66,7 +66,7 @@ public abstract class Piece : IBlockContainer {
         }
 
         if (rerender) Display();
-        Game.ShowDebugInfo();
+        Game.ShowGameInfo();
     }
     public void Drop() {
         while (!ActiveBoard.CheckForStop()) {
