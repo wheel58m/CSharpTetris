@@ -18,13 +18,11 @@ using Tetris.Classes;
 // Set Console Properties ------------------------------------------------------
 Console.Title = "Tetris";
 Console.CursorVisible = false;
-Utilities.Resize(50, 32);
+Utilities.Resize(45, 32);
 
-// Display Title Screen --------------------------------------------------------
-#region Title Screen
-Console.Clear();
+// Initialize Game Variables ---------------------------------------------------
+#region Game Variables
 Board titleBoard = new();
-titleBoard.Display();
 
 // Create Title Pieces
 List<Piece> titlePieces = new() {
@@ -39,12 +37,7 @@ List<Piece> titlePieces = new() {
     new ZPiece(new(4, 1), Color.Red, Orientation.Right),
 };
 
-// Display Title Pieces
-foreach (Piece piece in titlePieces) {
-    piece.Display();
-}
-
-// Display Title Text
+// Title Text
 string[] tetrisTitle = {
     @"╚══════════════════════════════╝",
     @"  _____ ___ _____ ___ ___ ___   ",
@@ -54,15 +47,40 @@ string[] tetrisTitle = {
     @"                                ",
     @"╔══════════════════════════════╗",
 };
-
-Console.SetCursorPosition(0, 7);
-foreach (string line in tetrisTitle) {
-    Console.WriteLine(line);
-}
-
-// Start Game Prompt
-Console.Write("║   Press any key to start...");
-Console.ReadKey(true);
 #endregion
 
+// Display Title Screen --------------------------------------------------------
+DisplayTitleScreen("║   Press any key to start...");
+// DisplayTitleScreen("║         Game Over!");
+// Console.WriteLine($"║        Score: {Game.Score}");
+
+// Run Game --------------------------------------------------------------------
 Game.Run();
+
+// Display Game Over Screen ----------------------------------------------------
+DisplayTitleScreen("║         Game Over!");
+
+void DisplayTitleScreen(string msg) {
+    Console.Clear();
+
+    // Display Borders
+    titleBoard.Display();
+
+    // Display Title Pieces
+    foreach (Piece piece in titlePieces) {
+        piece.Display();
+    }
+
+    // Display Title Text
+    Console.SetCursorPosition(0, 7);
+    foreach (string line in tetrisTitle) {
+        Console.WriteLine(line);
+    }
+
+    // Display Message & Continue Prompt
+    Console.WriteLine(msg);
+    if (!Game.IsRunning) {
+        Console.WriteLine($"║        Score: {Game.Score}");
+    }
+    Console.ReadKey(true);
+}

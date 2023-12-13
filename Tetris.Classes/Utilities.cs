@@ -8,30 +8,37 @@ public static class Utilities {
 
     // Debug Tool --------------------------------------------------------------
     public static class Debug {
-        public static bool ShowBlockID { get; set; } = true;
-        public static bool ShowDebugInfo { get; set; } = true;
-        public static DebugItem DebugInfo { get; set; } = DebugItem.Piece;
+        public static bool ShowBlockID { get; set; } = false;
+        public static bool ShowDebugInfo { get; set; } = false;
+        public static DebugItem DebugInfo { get; set; } = DebugItem.Board;
         public static bool Fall { get; set; } = true;
         public static void DisplayBoardInfo(Board board) {
-            Console.SetCursorPosition(0, board.Height + 2);
-            ClearLine();
-            ClearLine();
-            ClearLine();
-            ClearLine();
+            ClearInfo();
             Console.SetCursorPosition(0, board.Height + 2);
             Console.WriteLine($"Fallspeed: {board.FallSpeed}");   
         }
         public static void DisplayPieceInfo(Piece piece) {
-            Console.SetCursorPosition(0, piece.ActiveBoard.Height + 2);
-            ClearLine();
-            ClearLine();
-            ClearLine();
-            ClearLine();
+            ClearInfo();
             Console.SetCursorPosition(0, piece.ActiveBoard.Height + 2);
             Console.WriteLine($"Shape: {piece.Shape}");
             Console.WriteLine($"Position: ({piece.Position.X}, {piece.Position.Y})");
             Console.WriteLine($"Orientation: {piece.Orientation}");
             Console.WriteLine($"Color: {piece.Color} ({(int)piece.Color!})");
+        }
+        public static void DisplayBlocksInfo(Block[] blocks) {
+            ClearInfo();
+            Console.SetCursorPosition(0, Game.ActiveBoard.Height + 2);
+            foreach (Block block in blocks) {
+                Console.WriteLine($"Block {block.GetID()}: ({block.Position.X}, {block.Position.Y})");
+            }
+        }
+        public static void ClearInfo() {
+            Console.SetCursorPosition(0, Game.ActiveBoard.Height + 2);
+            ClearLine();
+            ClearLine();
+            ClearLine();
+            ClearLine();
+        
         }
     }
     // Console Utilities -------------------------------------------------------

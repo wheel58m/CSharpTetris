@@ -3,6 +3,7 @@ using static Tetris.Classes.Orientation; // Allows the use the Orientation enum 
 namespace Tetris.Classes;
 
 public abstract class Piece : IBlockContainer {
+    #region Properties
     public Shape Shape { get; set; } = Shape.I;
     public Block[] Blocks { get; set; } = new Block[4];
     public Color Color { get; set; } = Green;
@@ -10,6 +11,7 @@ public abstract class Piece : IBlockContainer {
     public Orientation Orientation { get; set; } = Up;
     protected Dictionary<Orientation, GridCoordinate[]> BlockPositions { get; init; } = new();
     public Board ActiveBoard { get; init; } = Game.ActiveBoard;
+    #endregion
 
     // Constructor -------------------------------------------------------------
     public Piece(GridCoordinate position, Color color = Green, Orientation orientation = Up) {
@@ -35,8 +37,6 @@ public abstract class Piece : IBlockContainer {
                 HandleException(ex, block);
             }
         }
-
-        // if (Utilities.Debug.ShowDebugInfo && Utilities.Debug.DebugInfo == DebugItem.Piece) DisplayPieceInfo();
     }
     public void Clear() {
         foreach (Block block in Blocks) {
@@ -66,15 +66,16 @@ public abstract class Piece : IBlockContainer {
         }
 
         if (rerender) Display();
+        Game.ShowDebugInfo();
     }
     public void Drop() {
-        Fall(20);
+        while (!ActiveBoard.CheckForStop()) {
+            Fall(20);
+        }
     }
     public void Fall(int speed) {
-        while (!ActiveBoard.CheckForStop()) {
-            Move(0, 1);
-            Thread.Sleep(speed);
-        }
+        Thread.Sleep(speed);
+        Move(0, 1);
     }
     public virtual bool CanRotate() {
         // Check If Rotation Will Exceed Board Boundary

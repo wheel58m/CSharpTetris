@@ -1,83 +1,144 @@
 namespace Tetris.Classes;
+    public static class Game {
+        public static Board ActiveBoard { get; set; } = new Board();
+        public static bool IsRunning { get; set; } = true;
+        public static int Score { get; set; } = 0;
+        public static readonly object lockObject = new();
 
-public static class Game {
-    public static Board ActiveBoard { get; set; } = new Board();
+        public static void Run() {
+            InitializeGame();
 
-    // Methods -----------------------------------------------------------------
-    public static void Run() {
-        Console.CursorVisible = false; // Hide the Cursor
+            // Start a new thread for user input processing
+            Thread inputThread = new Thread(ProcessUserInput);
+            inputThread.Start();
 
-        // Set & Display Board
-        ActiveBoard = new Board();
-        ActiveBoard.Display();
+            GameLoop();
+        }
 
-        Thread userInputThread = new Thread(() => {
-            while (true) {
-                ConsoleKeyInfo key = Console.ReadKey(true);
-                ProcessUserInput(key);
-            }
-        });
+        private static void InitializeGame() {
+            Console.CursorVisible = false; // Hide the Cursor
 
-        userInputThread.Start();
+            // Set & Display Board
+            ActiveBoard = new Board();
+            ActiveBoard.Display();
 
-        while (true) {
+            // Generate First Piece
             ActiveBoard.GeneratePiece();
-            ShowDebugInfo();
+        }
 
-            while (!ActiveBoard.CheckForStop()) {
-                ConsoleKeyInfo key = Console.ReadKey(true);
-                ProcessUserInput(key);
-            }
+private static void GameLoop() {
+    while (IsRunning) {
+        bool checkForStop;
+        bool checkForCompleteRows;
 
-            if (ActiveBoard.Grid.CheckForCompleteRows()) {
-                ActiveBoard.Grid.ClearRows();
-                ActiveBoard.Grid.DropRows();
-                ActiveBoard.FallSpeed = ActiveBoard.FallSpeed - 10; // Increase Speed
+        lock (lockObject) {
+            checkForStop = ActiveBoard.CheckForStop();
+            checkForCompleteRows = ActiveBoard.Grid.CheckForCompleteRows();
+        }
+
+        if (!checkForStop) {
+            ActiveBoard.ActivePiece?.Fall(ActiveBoard.FallSpeed);
+        }
+        else if (checkForCompleteRows) {
+            Score += ActiveBoard.Grid.CompleteRows.Count * ActiveBoard.Grid.Width; // Update Score
+            ActiveBoard.Grid.ClearRows();
+            ActiveBoard.Grid.DropRows();
+            ActiveBoard.FallSpeed = ActiveBoard.FallSpeed - 10; // Increase Speed
+        }
+        else {
+            ActiveBoard.GeneratePiece();
+
+            // Check If New Piece Is Stopped
+            if (ActiveBoard.CheckForStop() && ActiveBoard.ActivePiece?.Position.Y <= 1) {
+                IsRunning = false;
             }
         }
     }
-    public static void ProcessUserInput(ConsoleKeyInfo key) {
-        switch (key.Key) {
+}
+
+        public static void ProcessUserInput() {
+            while (IsRunning) {
+                if (Console.KeyAvailable) {
+                    ConsoleKeyInfo key = Console.ReadKey(true);
+                    GameAction action = GetActionFromKey(key.Key);
+                    lock (lockObject) {
+                        PerformAction(action);
+                    }
+                }
+            }
+        }
+
+    private static GameAction GetActionFromKey(ConsoleKey key) {
+        switch (key) {
             case ConsoleKey.LeftArrow:
-            case ConsoleKey.A: // Debug Control
+            case ConsoleKey.A:
+                return GameAction.MoveLeft;
+            case ConsoleKey.RightArrow:
+            case ConsoleKey.D:
+                return GameAction.MoveRight;
+            case ConsoleKey.DownArrow:
+                return GameAction.Drop;
+            case ConsoleKey.S:
+                return GameAction.MoveDown;
+            case ConsoleKey.UpArrow:
+                return GameAction.Rotate;
+            case ConsoleKey.W:
+                return GameAction.MoveUp;
+            default:
+                return GameAction.GeneratePiece;
+        }
+    }
+
+    private static void PerformAction(GameAction action) {
+        switch (action) {
+            case GameAction.MoveLeft:
                 ActiveBoard.ActivePiece?.Move(-1, 0);
                 break;
-            case ConsoleKey.RightArrow:
-            case ConsoleKey.D: // Debug Control
+            case GameAction.MoveRight:
                 ActiveBoard.ActivePiece?.Move(1, 0);
                 break;
-            case ConsoleKey.DownArrow:
+            case GameAction.Drop:
                 ActiveBoard.ActivePiece?.Drop();
                 break;
-            case ConsoleKey.S: // Debug Control
+            case GameAction.MoveDown:
                 ActiveBoard.ActivePiece?.Move(0, 1);
                 break;
-            case ConsoleKey.UpArrow:
+            case GameAction.Rotate:
                 ActiveBoard.ActivePiece?.Rotate();
                 break;
-            case ConsoleKey.W: // Debug Control
+            case GameAction.MoveUp:
                 ActiveBoard.ActivePiece?.Move(0, -1);
                 break;
-            default:
+            case GameAction.GeneratePiece:
                 ActiveBoard.ActivePiece?.Clear();
                 ActiveBoard.GeneratePiece();
                 break;
         }
     }
+
     public static void ShowDebugInfo() {
-        if (Utilities.Debug.ShowDebugInfo) {
-            switch (Utilities.Debug.DebugInfo) {
-                case DebugItem.Game:
-                    break;
-                case DebugItem.Board:
-                    Utilities.Debug.DisplayBoardInfo(ActiveBoard);
-                    break;
-                case DebugItem.Piece:
-                    Utilities.Debug.DisplayPieceInfo(ActiveBoard.ActivePiece);
-                    break;
-                case DebugItem.Block:
-                    break;
+        lock (lockObject) {
+            if (Utilities.Debug.ShowDebugInfo) {
+                switch (Utilities.Debug.DebugInfo) {
+                    case DebugItem.Game:
+                        break;
+                    case DebugItem.Board:
+                        Utilities.Debug.DisplayBoardInfo(ActiveBoard);
+                        break;
+                    case DebugItem.Piece:
+                        Utilities.Debug.DisplayPieceInfo(ActiveBoard.ActivePiece);
+                        break;
+                    case DebugItem.Block:
+                        Utilities.Debug.DisplayBlocksInfo(ActiveBoard.ActivePiece.Blocks);
+                        break;
+                }
+            } else {
+                Utilities.Debug.ClearInfo();
+                Console.SetCursorPosition(0, ActiveBoard.Height + 2);
+                Console.WriteLine($"Score: {Score}");
             }
         }
     }
 }
+
+public enum GameAction { MoveLeft, MoveRight, Drop, MoveDown, Rotate, MoveUp, GeneratePiece }
