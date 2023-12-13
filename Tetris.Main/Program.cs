@@ -8,8 +8,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 // ISSUES //////////////////////////////////////////////////////////////////////
+// ISSUE: Thread Race Conditions (When Dropping) Occasionally Cause:
+// - Dropped Pieces to Keep Falling Past the Stopping Point
+// - Game Information Loads Onto The Game Board
+// - Blocks That Complete A Row Don't Clear
+// - Dropped Blocks Leave Artifacts
+//
 // ISSUE: Rotation Occassionally Breaks Boundaries Resulting In Exception
-// ISSUE: Dropped Pieces Occassionaly Keep Falling Past The Stopping Point
 ////////////////////////////////////////////////////////////////////////////////
 
 using Tetris.Classes;
@@ -80,6 +85,19 @@ void DisplayTitleScreen(string msg) {
     Console.WriteLine(msg);
     if (!Game.IsRunning) {
         Console.WriteLine($"║        Score: {Game.Score}");
+    } else {
+        Console.WriteLine("║ The game is setup so pieces  ║");
+        Console.WriteLine("║ of a random shape, position, ║");
+        Console.WriteLine("║ and orientation are created. ║");
+        Console.WriteLine("║                              ║");
+        Console.WriteLine("║   Use the following keys to  ║");
+        Console.WriteLine("║      control the pieces:     ║");
+        Console.WriteLine("║                              ║");
+        Console.WriteLine("║Up Arrow (↑): Rotate Clockwise║");
+        Console.WriteLine("║Down Arrow (↓): Drop Piece    ║");
+        Console.WriteLine("║Left Arrow (←): Move Left     ║");
+        Console.WriteLine("║Down Arrow (→): Drop Piece    ║");
+        
     }
     Console.ReadKey(true);
 }

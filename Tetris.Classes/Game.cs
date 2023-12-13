@@ -85,7 +85,8 @@ private static void GameLoop() {
             case ConsoleKey.W:
                 return GameAction.MoveUp;
             default:
-                return GameAction.GeneratePiece;
+                return GameAction.ShowHelp;
+                // return GameAction.GeneratePiece;
         }
     }
 
@@ -112,6 +113,9 @@ private static void GameLoop() {
             case GameAction.GeneratePiece:
                 ActiveBoard.ActivePiece?.Clear();
                 ActiveBoard.GeneratePiece();
+                break;
+            case GameAction.ShowHelp:
+                DisplayControls();
                 break;
         }
     }
@@ -140,6 +144,11 @@ private static void GameLoop() {
             }
         }
     }
+    public static void DisplayControls() {
+        Utilities.Debug.ClearInfo();
+        Console.SetCursorPosition(0, ActiveBoard.Height + 2);
+        Console.WriteLine("(↑): Rotate (↓): Drop (←): Move (→): Drop");
+    }
 }
 
-public enum GameAction { MoveLeft, MoveRight, Drop, MoveDown, Rotate, MoveUp, GeneratePiece }
+public enum GameAction { MoveLeft, MoveRight, Drop, MoveDown, Rotate, MoveUp, GeneratePiece, ShowHelp }
