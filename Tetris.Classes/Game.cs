@@ -147,7 +147,7 @@ private static void GameLoop() {
     public static void DisplayControls() {
         Utilities.Debug.ClearInfo();
         Console.SetCursorPosition(0, ActiveBoard.Height + 2);
-        Console.WriteLine("(↑): Rotate (↓): Drop (←): Move (→): Drop");
+        Console.WriteLine("(↑): Rotate (↓): Drop (←): Move Left (→): Move Right");
     }
 }
 

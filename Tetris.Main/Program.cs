@@ -96,7 +96,7 @@ void DisplayTitleScreen(string msg) {
         Console.WriteLine("║Up Arrow (↑): Rotate Clockwise║");
         Console.WriteLine("║Down Arrow (↓): Drop Piece    ║");
         Console.WriteLine("║Left Arrow (←): Move Left     ║");
-        Console.WriteLine("║Down Arrow (→): Drop Piece    ║");
+        Console.WriteLine("║Right Arrow (→): Move Right   ║");
         
     }
     Console.ReadKey(true);
